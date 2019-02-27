@@ -67,7 +67,26 @@ namespace tax_brackets
 
             if (incomeValid)
             {
-                // Logic that will eventually happen...
+                if (single.Checked)
+                {
+
+                }
+                else if (marriedJoint.Checked)
+                {
+
+                }
+                else if (headOfHousehold.Checked)
+                {
+
+                }
+                else if (marriedSeparate.Checked)
+                {
+
+                }
+                else
+                {
+                    // Something is broken if this ever happens, but I don't want to make the assumption one is checked
+                }
             }
             else
             {
