@@ -59,7 +59,23 @@ namespace tax_brackets
                 TIER7_RATE = .37;         // The 2019 tax rate for tier 7.
 
             int topMarginalBracket, // The highest bracket the user is in
-                incomeTaxOwed;      // The money owed to Uncle Sam
+                incomeTaxOwed,      // The money owed to Uncle Sam
+                reportedIncome;     // The income reported by the user
+
+            bool incomeValid,   // Our user entered a valid income
+                statusSelected; // Our user selected a filing status
+
+            statusSelected = (single.Checked || marriedJoint.Checked || headOfHousehold.Checked || marriedSeparate.Checked);
+            incomeValid = int.TryParse(income.Text, out reportedIncome);
+
+            if (incomeValid && statusSelected)
+            {
+                // Logic that will eventually happen...
+            }
+            else
+            {
+                MessageBox.Show("There was an error processing your taxes. Please check the validity of your data and try again.", "Form Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
     }
 }
