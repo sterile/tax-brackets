@@ -62,19 +62,17 @@ namespace tax_brackets
                 incomeTaxOwed,      // The money owed to Uncle Sam
                 reportedIncome;     // The income reported by the user
 
-            bool incomeValid,   // Our user entered a valid income
-                statusSelected; // Our user selected a filing status
-
-            statusSelected = (single.Checked || marriedJoint.Checked || headOfHousehold.Checked || marriedSeparate.Checked);
+            bool incomeValid; // Our user entered a valid income
             incomeValid = int.TryParse(income.Text, out reportedIncome);
 
-            if (incomeValid && statusSelected)
+            if (incomeValid)
             {
                 // Logic that will eventually happen...
             }
             else
             {
-                MessageBox.Show("There was an error processing your taxes. Please check the validity of your data and try again.", "Form Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("There was an error processing your taxes. Please ensure your income is reported in whole dollars and try again.",
+                    "Form Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
     }
