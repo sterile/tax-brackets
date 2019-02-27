@@ -29,11 +29,11 @@ namespace tax_brackets
         private void calculateButton_Click(object sender, EventArgs e)
         {
             const uint TIER1_SINGLE_MAX = 9700, // The highest dollar amount for someone filing as a single in tier 1.
-                TIER2_SINGLE_MAX = 39475,      // The highest dollar amount for someone filing as a single in tier 2.
-                TIER3_SINGLE_MAX = 84200,      // The highest dollar amount for someone filing as a single in tier 3.
-                TIER4_SINGLE_MAX = 160725,     // The highest dollar amount for someone filing as a single in tier 4.
-                TIER5_SINGLE_MAX = 204100,     // The highest dollar amount for someone filing as a single in tier 5.
-                TIER6_SINGLE_MAX = 510300,     // The highest dollar amount for someone filing as a single in tier 6.
+                TIER2_SINGLE_MAX = 39475,       // The highest dollar amount for someone filing as a single in tier 2.
+                TIER3_SINGLE_MAX = 84200,       // The highest dollar amount for someone filing as a single in tier 3.
+                TIER4_SINGLE_MAX = 160725,      // The highest dollar amount for someone filing as a single in tier 4.
+                TIER5_SINGLE_MAX = 204100,      // The highest dollar amount for someone filing as a single in tier 5.
+                TIER6_SINGLE_MAX = 510300,      // The highest dollar amount for someone filing as a single in tier 6.
 
                 TIER1_JOINT_MAX = 19400,  // The highest dollar amount for someone filing jointly in tier 1.
                 TIER2_JOINT_MAX = 78950,  // The highest dollar amount for someone filing jointly in tier 2.
