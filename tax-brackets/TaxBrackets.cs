@@ -59,11 +59,12 @@ namespace tax_brackets
                 TIER7_RATE = .37;         // The 2019 tax rate for tier 7.
 
             int topMarginalBracket, // The highest bracket the user is in
-                incomeTaxOwed,      // The money owed to Uncle Sam
-                reportedIncome;     // The income reported by the user
+                incomeTaxOwed;      // The money owed to Uncle Sam
+
+            uint reportedIncome; // The income reported by the user
 
             bool incomeValid; // Our user entered a valid income
-            incomeValid = int.TryParse(income.Text, out reportedIncome);
+            incomeValid = uint.TryParse(income.Text, out reportedIncome);
 
             if (incomeValid)
             {
