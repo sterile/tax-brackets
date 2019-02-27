@@ -193,7 +193,7 @@ namespace tax_brackets
                 }
 
                 taxOwed.Text = incomeTaxOwed.ToString("C");
-                taxRate.Text = topMarginalBracket.ToString("P");
+                taxRate.Text = topMarginalBracket.ToString("P0");
 
                 Debug.WriteLine("");
                 Debug.WriteLine("=================");
