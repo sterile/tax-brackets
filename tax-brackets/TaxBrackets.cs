@@ -5,17 +5,9 @@
  * Course Section: 01
  * Description: This program determines a users marginal tax rate and the amount due.
  */
- 
+
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-using System.Diagnostics;
 
 namespace tax_brackets
 {
@@ -76,430 +68,293 @@ namespace tax_brackets
 
             if (incomeValid)
             {
-                Debug.WriteLine("");
-                Debug.WriteLine("==== NEW RUN ====");
-                Debug.WriteLine("");
-
-                Debug.WriteLine($"Their reported income is {reportedIncome:C}");
                 if (single.Checked)
                 {
-                    Debug.WriteLine("The user is filing separately");
                     tierIncome = reportedIncome;
 
                     if (tierIncome > TIER6_SINGLE_MAX)
                     {
-                        Debug.WriteLine("The user has income at tier 7");
                         topMarginalBracket++;
 
                         tierIncome -= TIER6_SINGLE_MAX;
-                        Debug.WriteLine($"We will be charging a {topMarginalBracket:P} tax on {tierIncome:C}");
                         incomeTaxOwed += tierIncome * TIER7_RATE;
                         tierIncome = TIER6_SINGLE_MAX;
-
-                        Debug.WriteLine($"As of now they owe {incomeTaxOwed:C}");
-                        Debug.WriteLine($"{tierIncome:C} is left remaining to tax");
-                        Debug.WriteLine("");
                     }
                     if (tierIncome >= TIER5_SINGLE_MAX)
                     {
-                        Debug.WriteLine("The user has income at tier 6");
                         topMarginalBracket++;
 
                         tierIncome -= TIER5_SINGLE_MAX;
-                        Debug.WriteLine($"We will be charging a {topMarginalBracket:P} tax on {tierIncome:C}");
+
                         incomeTaxOwed += tierIncome * TIER6_RATE;
                         tierIncome = TIER5_SINGLE_MAX;
-
-                        Debug.WriteLine($"As of now they owe {incomeTaxOwed:C}");
-                        Debug.WriteLine($"{tierIncome:C} is left remaining to tax");
-                        Debug.WriteLine("");
                     }
                     if (tierIncome >= TIER4_SINGLE_MAX)
                     {
-                        Debug.WriteLine("The user has income at tier 5");
                         topMarginalBracket++;
 
                         tierIncome -= TIER4_SINGLE_MAX;
-                        Debug.WriteLine($"We will be charging a {topMarginalBracket:P} tax on {tierIncome:C}");
+
                         incomeTaxOwed += tierIncome * TIER5_RATE;
                         tierIncome = TIER4_SINGLE_MAX;
-
-                        Debug.WriteLine($"As of now they owe {incomeTaxOwed:C}");
-                        Debug.WriteLine($"{tierIncome:C} is left remaining to tax");
-                        Debug.WriteLine("");
                     }
                     if (tierIncome >= TIER3_SINGLE_MAX)
                     {
-                        Debug.WriteLine("The user has income at tier 4");
                         topMarginalBracket++;
 
                         tierIncome -= TIER3_SINGLE_MAX;
-                        Debug.WriteLine($"We will be charging a {topMarginalBracket:P} tax on {tierIncome:C}");
+
                         incomeTaxOwed += tierIncome * TIER4_RATE;
                         tierIncome = TIER3_SINGLE_MAX;
-
-                        Debug.WriteLine($"As of now they owe {incomeTaxOwed:C}");
-                        Debug.WriteLine($"{tierIncome:C} is left remaining to tax");
-                        Debug.WriteLine("");
                     }
                     if (tierIncome >= TIER2_SINGLE_MAX)
                     {
-                        Debug.WriteLine("The user has income at tier 3");
                         topMarginalBracket++;
 
                         tierIncome -= TIER2_SINGLE_MAX;
-                        Debug.WriteLine($"We will be charging a {topMarginalBracket:P} tax on {tierIncome:C}");
+
                         incomeTaxOwed += tierIncome * TIER3_RATE;
                         tierIncome = TIER2_SINGLE_MAX;
-
-                        Debug.WriteLine($"As of now they owe {incomeTaxOwed:C}");
-                        Debug.WriteLine($"{tierIncome:C} is left remaining to tax");
-                        Debug.WriteLine("");
                     }
                     if (tierIncome >= TIER1_SINGLE_MAX)
                     {
-                        Debug.WriteLine("The user has income at tier 2");
                         topMarginalBracket++;
 
                         tierIncome -= TIER1_SINGLE_MAX;
-                        Debug.WriteLine($"We will be charging a {topMarginalBracket:P} tax on {tierIncome:C}");
+
                         incomeTaxOwed += tierIncome * TIER2_RATE;
                         tierIncome = TIER1_SINGLE_MAX;
-
-                        Debug.WriteLine($"As of now they owe {incomeTaxOwed:C}");
-                        Debug.WriteLine($"{tierIncome:C} is left remaining to tax");
-                        Debug.WriteLine("");
                     }
 
-                    Debug.WriteLine("The user has income at tier 1");
                     topMarginalBracket++;
 
-                    Debug.WriteLine($"We will be charging a {topMarginalBracket:P} tax on {tierIncome:C}");
                     incomeTaxOwed += tierIncome * TIER1_RATE;
                     tierIncome = 0;
-
-                    Debug.WriteLine($"{incomeTaxOwed:C} is the total tax");
                 }
                 else if (marriedJoint.Checked)
                 {
-                    Debug.WriteLine("The user is filing jointly");
                     tierIncome = reportedIncome;
 
                     if (tierIncome > TIER6_JOINT_MAX)
                     {
-                        Debug.WriteLine("The user has income at tier 7");
                         topMarginalBracket++;
 
                         tierIncome -= TIER6_JOINT_MAX;
-                        Debug.WriteLine($"We will be charging a {topMarginalBracket:P} tax on {tierIncome:C}");
+
                         incomeTaxOwed += tierIncome * TIER7_RATE;
                         tierIncome = TIER6_JOINT_MAX;
-
-                        Debug.WriteLine($"As of now they owe {incomeTaxOwed:C}");
-                        Debug.WriteLine($"{tierIncome:C} is left remaining to tax");
-                        Debug.WriteLine("");
                     }
                     if (tierIncome >= TIER5_JOINT_MAX)
                     {
-                        Debug.WriteLine("The user has income at tier 6");
                         topMarginalBracket++;
 
                         tierIncome -= TIER5_JOINT_MAX;
-                        Debug.WriteLine($"We will be charging a {topMarginalBracket:P} tax on {tierIncome:C}");
+
                         incomeTaxOwed += tierIncome * TIER6_RATE;
                         tierIncome = TIER5_JOINT_MAX;
-
-                        Debug.WriteLine($"As of now they owe {incomeTaxOwed:C}");
-                        Debug.WriteLine($"{tierIncome:C} is left remaining to tax");
-                        Debug.WriteLine("");
                     }
                     if (tierIncome >= TIER4_JOINT_MAX)
                     {
-                        Debug.WriteLine("The user has income at tier 5");
                         topMarginalBracket++;
 
                         tierIncome -= TIER4_JOINT_MAX;
-                        Debug.WriteLine($"We will be charging a {topMarginalBracket:P} tax on {tierIncome:C}");
+
                         incomeTaxOwed += tierIncome * TIER5_RATE;
                         tierIncome = TIER4_JOINT_MAX;
-
-                        Debug.WriteLine($"As of now they owe {incomeTaxOwed:C}");
-                        Debug.WriteLine($"{tierIncome:C} is left remaining to tax");
-                        Debug.WriteLine("");
                     }
                     if (tierIncome >= TIER3_JOINT_MAX)
                     {
-                        Debug.WriteLine("The user has income at tier 4");
                         topMarginalBracket++;
 
                         tierIncome -= TIER3_JOINT_MAX;
-                        Debug.WriteLine($"We will be charging a {topMarginalBracket:P} tax on {tierIncome:C}");
+
                         incomeTaxOwed += tierIncome * TIER4_RATE;
                         tierIncome = TIER3_JOINT_MAX;
-
-                        Debug.WriteLine($"As of now they owe {incomeTaxOwed:C}");
-                        Debug.WriteLine($"{tierIncome:C} is left remaining to tax");
-                        Debug.WriteLine("");
                     }
                     if (tierIncome >= TIER2_JOINT_MAX)
                     {
-                        Debug.WriteLine("The user has income at tier 3");
                         topMarginalBracket++;
 
                         tierIncome -= TIER2_JOINT_MAX;
-                        Debug.WriteLine($"We will be charging a {topMarginalBracket:P} tax on {tierIncome:C}");
+
                         incomeTaxOwed += tierIncome * TIER3_RATE;
                         tierIncome = TIER2_JOINT_MAX;
-
-                        Debug.WriteLine($"As of now they owe {incomeTaxOwed:C}");
-                        Debug.WriteLine($"{tierIncome:C} is left remaining to tax");
-                        Debug.WriteLine("");
                     }
                     if (tierIncome >= TIER1_JOINT_MAX)
                     {
-                        Debug.WriteLine("The user has income at tier 2");
                         topMarginalBracket++;
 
                         tierIncome -= TIER1_JOINT_MAX;
-                        Debug.WriteLine($"We will be charging a {topMarginalBracket:P} tax on {tierIncome:C}");
+
                         incomeTaxOwed += tierIncome * TIER2_RATE;
                         tierIncome = TIER1_JOINT_MAX;
-
-                        Debug.WriteLine($"As of now they owe {incomeTaxOwed:C}");
-                        Debug.WriteLine($"{tierIncome:C} is left remaining to tax");
-                        Debug.WriteLine("");
                     }
 
-                    Debug.WriteLine("The user has income at tier 1");
                     topMarginalBracket++;
 
-                    Debug.WriteLine($"We will be charging a {topMarginalBracket:P} tax on {tierIncome:C}");
                     incomeTaxOwed += tierIncome * TIER1_RATE;
                     tierIncome = 0;
-
-                    Debug.WriteLine($"{incomeTaxOwed:C} is the total tax");
-                    }
+                }
                 else if (headOfHousehold.Checked)
                 {
-                    Debug.WriteLine("The user is filing as the head of the household");
                     tierIncome = reportedIncome;
 
                     if (tierIncome > TIER6_HEAD_MAX)
                     {
-                        Debug.WriteLine("The user has income at tier 7");
                         topMarginalBracket++;
 
                         tierIncome -= TIER6_HEAD_MAX;
-                        Debug.WriteLine($"We will be charging a {topMarginalBracket:P} tax on {tierIncome:C}");
+
                         incomeTaxOwed += tierIncome * TIER7_RATE;
                         tierIncome = TIER6_HEAD_MAX;
-
-                        Debug.WriteLine($"As of now they owe {incomeTaxOwed:C}");
-                        Debug.WriteLine($"{tierIncome:C} is left remaining to tax");
-                        Debug.WriteLine("");
                     }
                     if (tierIncome >= TIER5_HEAD_MAX)
                     {
-                        Debug.WriteLine("The user has income at tier 6");
                         topMarginalBracket++;
 
                         tierIncome -= TIER5_HEAD_MAX;
-                        Debug.WriteLine($"We will be charging a {topMarginalBracket:P} tax on {tierIncome:C}");
+
                         incomeTaxOwed += tierIncome * TIER6_RATE;
                         tierIncome = TIER5_HEAD_MAX;
-
-                        Debug.WriteLine($"As of now they owe {incomeTaxOwed:C}");
-                        Debug.WriteLine($"{tierIncome:C} is left remaining to tax");
-                        Debug.WriteLine("");
                     }
                     if (tierIncome >= TIER4_HEAD_MAX)
                     {
-                        Debug.WriteLine("The user has income at tier 5");
                         topMarginalBracket++;
 
                         tierIncome -= TIER4_HEAD_MAX;
-                        Debug.WriteLine($"We will be charging a {topMarginalBracket:P} tax on {tierIncome:C}");
+
                         incomeTaxOwed += tierIncome * TIER5_RATE;
                         tierIncome = TIER4_HEAD_MAX;
-
-                        Debug.WriteLine($"As of now they owe {incomeTaxOwed:C}");
-                        Debug.WriteLine($"{tierIncome:C} is left remaining to tax");
-                        Debug.WriteLine("");
                     }
                     if (tierIncome >= TIER3_HEAD_MAX)
                     {
-                        Debug.WriteLine("The user has income at tier 4");
                         topMarginalBracket++;
 
                         tierIncome -= TIER3_HEAD_MAX;
-                        Debug.WriteLine($"We will be charging a {topMarginalBracket:P} tax on {tierIncome:C}");
+
                         incomeTaxOwed += tierIncome * TIER4_RATE;
                         tierIncome = TIER3_HEAD_MAX;
-
-                        Debug.WriteLine($"As of now they owe {incomeTaxOwed:C}");
-                        Debug.WriteLine($"{tierIncome:C} is left remaining to tax");
-                        Debug.WriteLine("");
                     }
                     if (tierIncome >= TIER2_HEAD_MAX)
                     {
-                        Debug.WriteLine("The user has income at tier 3");
                         topMarginalBracket++;
 
                         tierIncome -= TIER2_HEAD_MAX;
-                        Debug.WriteLine($"We will be charging a {topMarginalBracket:P} tax on {tierIncome:C}");
+
                         incomeTaxOwed += tierIncome * TIER3_RATE;
                         tierIncome = TIER2_HEAD_MAX;
-
-                        Debug.WriteLine($"As of now they owe {incomeTaxOwed:C}");
-                        Debug.WriteLine($"{tierIncome:C} is left remaining to tax");
-                        Debug.WriteLine("");
                     }
                     if (tierIncome >= TIER1_HEAD_MAX)
                     {
-                        Debug.WriteLine("The user has income at tier 2");
                         topMarginalBracket++;
 
                         tierIncome -= TIER1_HEAD_MAX;
-                        Debug.WriteLine($"We will be charging a {topMarginalBracket:P} tax on {tierIncome:C}");
+
                         incomeTaxOwed += tierIncome * TIER2_RATE;
                         tierIncome = TIER1_HEAD_MAX;
-
-                        Debug.WriteLine($"As of now they owe {incomeTaxOwed:C}");
-                        Debug.WriteLine($"{tierIncome:C} is left remaining to tax");
-                        Debug.WriteLine("");
                     }
 
-                    Debug.WriteLine("The user has income at tier 1");
                     topMarginalBracket++;
 
-                    Debug.WriteLine($"We will be charging a {topMarginalBracket:P} tax on {tierIncome:C}");
                     incomeTaxOwed += tierIncome * TIER1_RATE;
                     tierIncome = 0;
-
-                    Debug.WriteLine($"{incomeTaxOwed:C} is the total tax");
                 }
                 else if (marriedSeparate.Checked)
                 {
-                    Debug.WriteLine("The user is filing married but separately");
-
                     tierIncome = reportedIncome;
 
                     if (tierIncome > TIER6_SEPARATE_MAX)
                     {
-                        Debug.WriteLine("The user has income at tier 7");
                         topMarginalBracket++;
 
                         tierIncome -= TIER6_SEPARATE_MAX;
-                        Debug.WriteLine($"We will be charging a {topMarginalBracket:P} tax on {tierIncome:C}");
+
                         incomeTaxOwed += tierIncome * TIER7_RATE;
                         tierIncome = TIER6_SEPARATE_MAX;
-
-                        Debug.WriteLine($"As of now they owe {incomeTaxOwed:C}");
-                        Debug.WriteLine($"{tierIncome:C} is left remaining to tax");
-                        Debug.WriteLine("");
                     }
                     if (tierIncome >= TIER5_SEPARATE_MAX)
                     {
-                        Debug.WriteLine("The user has income at tier 6");
                         topMarginalBracket++;
 
                         tierIncome -= TIER5_SEPARATE_MAX;
-                        Debug.WriteLine($"We will be charging a {topMarginalBracket:P} tax on {tierIncome:C}");
+
                         incomeTaxOwed += tierIncome * TIER6_RATE;
                         tierIncome = TIER5_SEPARATE_MAX;
-
-                        Debug.WriteLine($"As of now they owe {incomeTaxOwed:C}");
-                        Debug.WriteLine($"{tierIncome:C} is left remaining to tax");
-                        Debug.WriteLine("");
                     }
                     if (tierIncome >= TIER4_SEPARATE_MAX)
                     {
-                        Debug.WriteLine("The user has income at tier 5");
                         topMarginalBracket++;
 
                         tierIncome -= TIER4_SEPARATE_MAX;
-                        Debug.WriteLine($"We will be charging a {topMarginalBracket:P} tax on {tierIncome:C}");
+
                         incomeTaxOwed += tierIncome * TIER5_RATE;
                         tierIncome = TIER4_SEPARATE_MAX;
-
-                        Debug.WriteLine($"As of now they owe {incomeTaxOwed:C}");
-                        Debug.WriteLine($"{tierIncome:C} is left remaining to tax");
-                        Debug.WriteLine("");
                     }
                     if (tierIncome >= TIER3_SEPARATE_MAX)
                     {
-                        Debug.WriteLine("The user has income at tier 4");
                         topMarginalBracket++;
 
                         tierIncome -= TIER3_SEPARATE_MAX;
-                        Debug.WriteLine($"We will be charging a {topMarginalBracket:P} tax on {tierIncome:C}");
+
                         incomeTaxOwed += tierIncome * TIER4_RATE;
                         tierIncome = TIER3_SEPARATE_MAX;
-
-                        Debug.WriteLine($"As of now they owe {incomeTaxOwed:C}");
-                        Debug.WriteLine($"{tierIncome:C} is left remaining to tax");
-                        Debug.WriteLine("");
                     }
                     if (tierIncome >= TIER2_SEPARATE_MAX)
                     {
-                        Debug.WriteLine("The user has income at tier 3");
                         topMarginalBracket++;
 
                         tierIncome -= TIER2_SEPARATE_MAX;
-                        Debug.WriteLine($"We will be charging a {topMarginalBracket:P} tax on {tierIncome:C}");
+
                         incomeTaxOwed += tierIncome * TIER3_RATE;
                         tierIncome = TIER2_SEPARATE_MAX;
-
-                        Debug.WriteLine($"As of now they owe {incomeTaxOwed:C}");
-                        Debug.WriteLine($"{tierIncome:C} is left remaining to tax");
-                        Debug.WriteLine("");
                     }
                     if (tierIncome >= TIER1_SEPARATE_MAX)
                     {
-                        Debug.WriteLine("The user has income at tier 2");
                         topMarginalBracket++;
 
                         tierIncome -= TIER1_SEPARATE_MAX;
-                        Debug.WriteLine($"We will be charging a {topMarginalBracket:P} tax on {tierIncome:C}");
+
                         incomeTaxOwed += tierIncome * TIER2_RATE;
                         tierIncome = TIER1_SEPARATE_MAX;
-
-                        Debug.WriteLine($"As of now they owe {incomeTaxOwed:C}");
-                        Debug.WriteLine($"{tierIncome:C} is left remaining to tax");
-                        Debug.WriteLine("");
                     }
 
-                    Debug.WriteLine("The user has income at tier 1");
                     topMarginalBracket++;
 
-                    Debug.WriteLine($"We will be charging a {topMarginalBracket:P} tax on {tierIncome:C}");
                     incomeTaxOwed += tierIncome * TIER1_RATE;
                     tierIncome = 0;
-
-                    Debug.WriteLine($"{incomeTaxOwed:C} is the total tax");
                 }
 
-                Debug.WriteLine($"Our tax level is {topMarginalBracket}");
                 if (topMarginalBracket == 7)
+                {
                     bracketRate = TIER7_RATE;
+                }
                 else if (topMarginalBracket == 6)
+                {
                     bracketRate = TIER6_RATE;
+                }
                 else if (topMarginalBracket == 5)
+                {
                     bracketRate = TIER5_RATE;
+                }
                 else if (topMarginalBracket == 4)
+                {
                     bracketRate = TIER4_RATE;
+                }
                 else if (topMarginalBracket == 3)
+                {
                     bracketRate = TIER3_RATE;
+                }
                 else if (topMarginalBracket == 2)
+                {
                     bracketRate = TIER2_RATE;
+                }
                 else if (topMarginalBracket == 1)
+                {
                     bracketRate = TIER1_RATE;
+                }
 
                 taxOwed.Text = incomeTaxOwed.ToString("C");
                 taxRate.Text = bracketRate.ToString("P0");
-
-                Debug.WriteLine("");
-                Debug.WriteLine("=================");
             }
             else
             {
