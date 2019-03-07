@@ -60,7 +60,7 @@ namespace tax_brackets
                 incomeTaxOwed = 0;  // The money owed to Uncle Sam
 
             uint reportedIncome, // The income reported by the user
-                
+
                 declaredMargin1 = 0, // The highest income for the marginal bracket 1.
                 declaredMargin2 = 0, // The highest income for the marginal bracket 2.
                 declaredMargin3 = 0, // The highest income for the marginal bracket 3.
@@ -82,7 +82,8 @@ namespace tax_brackets
                     declaredMargin5 = TIER5_SINGLE_MAX;
                     declaredMargin6 = TIER6_SINGLE_MAX;
                 }
-                else if (marriedJoint.Checked) {
+                else if (marriedJoint.Checked)
+                {
                     declaredMargin1 = TIER1_JOINT_MAX;
                     declaredMargin2 = TIER2_JOINT_MAX;
                     declaredMargin3 = TIER3_JOINT_MAX;
@@ -90,7 +91,8 @@ namespace tax_brackets
                     declaredMargin5 = TIER5_JOINT_MAX;
                     declaredMargin6 = TIER6_JOINT_MAX;
                 }
-                else if (headOfHousehold.Checked) {
+                else if (headOfHousehold.Checked)
+                {
                     declaredMargin1 = TIER1_HEAD_MAX;
                     declaredMargin2 = TIER2_HEAD_MAX;
                     declaredMargin3 = TIER3_HEAD_MAX;
@@ -98,7 +100,8 @@ namespace tax_brackets
                     declaredMargin5 = TIER5_HEAD_MAX;
                     declaredMargin6 = TIER6_HEAD_MAX;
                 }
-                else if (marriedSeparate.Checked) {
+                else if (marriedSeparate.Checked)
+                {
                     declaredMargin1 = TIER1_SEPARATE_MAX;
                     declaredMargin2 = TIER2_SEPARATE_MAX;
                     declaredMargin3 = TIER3_SEPARATE_MAX;
@@ -107,37 +110,57 @@ namespace tax_brackets
                     declaredMargin6 = TIER6_SEPARATE_MAX;
                 }
 
-                if (reportedIncome <= declaredMargin1) {
-                    incomeTaxOwed += reportedIncome * TIER1_RATE;
-                    bracketRate = TIER1_RATE;
-                }
-                if (reportedIncome <= declaredMargin2) {
-                    incomeTaxOwed += (reportedIncome - declaredMargin1) * TIER2_RATE;
-                    bracketRate = TIER2_RATE;
-                }
-                if (reportedIncome <= declaredMargin3) {
-                    incomeTaxOwed += (reportedIncome - declaredMargin2) * TIER3_RATE;
-                    bracketRate = TIER3_RATE;
-                }
-                if (reportedIncome <= declaredMargin4) {
-                    incomeTaxOwed += (reportedIncome - declaredMargin3) * TIER4_RATE;
-                    bracketRate = TIER4_RATE;
-                }
-                if (reportedIncome <= declaredMargin5) {
-                    incomeTaxOwed += (reportedIncome - declaredMargin4) * TIER5_RATE;
-                    bracketRate = TIER5_RATE;
-                }
-                if (reportedIncome <= declaredMargin6) {
-                    incomeTaxOwed += (reportedIncome - declaredMargin5) * TIER6_RATE;
-                    bracketRate = TIER6_RATE;
-                }
-                if (reportedIncome > declaredMargin6) {
-                    incomeTaxOwed += (reportedIncome - declaredMargin6) * TIER7_RATE;
+                if (reportedIncome > declaredMargin6)
+                {
                     bracketRate = TIER7_RATE;
+                    incomeTaxOwed += (reportedIncome - declaredMargin6) * bracketRate;
+                    reportedIncome = declaredMargin6;
+                }
+                if (reportedIncome > declaredMargin5)
+                {
+                    incomeTaxOwed += (reportedIncome - declaredMargin5) * TIER6_RATE;
+                    reportedIncome = declaredMargin5;
+                    if (bracketRate == 0)
+                        bracketRate = TIER6_RATE;
+                }
+                if (reportedIncome > declaredMargin4)
+                {
+                    incomeTaxOwed += (reportedIncome - declaredMargin4) * TIER5_RATE;
+                    reportedIncome = declaredMargin4;
+                    if (bracketRate == 0)
+                        bracketRate = TIER5_RATE;
+                }
+                if (reportedIncome > declaredMargin3)
+                {
+                    incomeTaxOwed += (reportedIncome - declaredMargin3) * TIER4_RATE;
+                    reportedIncome = declaredMargin3;
+                    if (bracketRate == 0)
+                        bracketRate = TIER4_RATE;
+                }
+                if (reportedIncome > declaredMargin2)
+                {
+                    incomeTaxOwed += (reportedIncome - declaredMargin2) * TIER3_RATE;
+                    reportedIncome = declaredMargin2;
+                    if (bracketRate == 0)
+                        bracketRate = TIER3_RATE;
+                }
+                if (reportedIncome > declaredMargin1)
+                {
+                    incomeTaxOwed += (reportedIncome - declaredMargin1) * TIER2_RATE;
+                    reportedIncome = declaredMargin1;
+                    if (bracketRate == 0)
+                        bracketRate = TIER2_RATE;
+                }
+                if (reportedIncome <= declaredMargin1)
+                {
+                    incomeTaxOwed += reportedIncome * TIER1_RATE;
+
+                    if (bracketRate == 0)
+                        bracketRate = TIER1_RATE;
                 }
 
                 taxOwed.Text = incomeTaxOwed.ToString("C");
-                taxRate.Text = bracketRate.ToString("P0");   
+                taxRate.Text = bracketRate.ToString("P0");
             }
             else
             {
