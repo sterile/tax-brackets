@@ -56,8 +56,10 @@ namespace tax_brackets
                 TIER6_RATE = .35,         // The 2019 tax rate for tier 6.
                 TIER7_RATE = .37;         // The 2019 tax rate for tier 7.
 
-            double bracketRate = 0, // The highest bracket percentage rate
-                incomeTaxOwed = 0;  // The money owed to Uncle Sam
+            const double unsetBracket = 0; // Constant for the bracket not being set
+
+            double bracketRate = unsetBracket, // The highest bracket percentage rate
+                incomeTaxOwed = 0;             // The money owed to Uncle Sam
 
             uint reportedIncome, // The income reported by the user
 
@@ -73,6 +75,7 @@ namespace tax_brackets
 
             if (incomeValid)
             {
+                // Filing status checks
                 if (single.Checked)
                 {
                     declaredMargin1 = TIER1_SINGLE_MAX;
@@ -109,53 +112,55 @@ namespace tax_brackets
                     declaredMargin5 = TIER5_SEPARATE_MAX;
                     declaredMargin6 = TIER6_SEPARATE_MAX;
                 }
+                // End of filing status checks
 
+                // Performs calculations for each tax margin
                 if (reportedIncome > declaredMargin6)
                 {
                     bracketRate = TIER7_RATE;
-                    incomeTaxOwed += (reportedIncome - declaredMargin6) * bracketRate;
-                    reportedIncome = declaredMargin6;
+                    incomeTaxOwed += (reportedIncome - declaredMargin6) * bracketRate; 
+                    reportedIncome = declaredMargin6; // Set the income to the next lowest margin to prevent logic errors
                 }
                 if (reportedIncome > declaredMargin5)
                 {
                     incomeTaxOwed += (reportedIncome - declaredMargin5) * TIER6_RATE;
-                    reportedIncome = declaredMargin5;
-                    if (bracketRate == 0)
+                    reportedIncome = declaredMargin5; // Set the income to the next lowest margin to prevent logic errors
+                    if (bracketRate == unsetBracket) // Set the bracket rate ONLY if it hasn't already been set
                         bracketRate = TIER6_RATE;
                 }
                 if (reportedIncome > declaredMargin4)
                 {
                     incomeTaxOwed += (reportedIncome - declaredMargin4) * TIER5_RATE;
-                    reportedIncome = declaredMargin4;
-                    if (bracketRate == 0)
+                    reportedIncome = declaredMargin4; // Set the income to the next lowest margin to prevent logic errors
+                    if (bracketRate == unsetBracket) // Set the bracket rate ONLY if it hasn't already been set
                         bracketRate = TIER5_RATE;
                 }
                 if (reportedIncome > declaredMargin3)
                 {
                     incomeTaxOwed += (reportedIncome - declaredMargin3) * TIER4_RATE;
-                    reportedIncome = declaredMargin3;
-                    if (bracketRate == 0)
+                    reportedIncome = declaredMargin3; // Set the income to the next lowest margin to prevent logic errors
+                    if (bracketRate == unsetBracket) // Set the bracket rate ONLY if it hasn't already been set
                         bracketRate = TIER4_RATE;
                 }
                 if (reportedIncome > declaredMargin2)
                 {
                     incomeTaxOwed += (reportedIncome - declaredMargin2) * TIER3_RATE;
-                    reportedIncome = declaredMargin2;
-                    if (bracketRate == 0)
+                    reportedIncome = declaredMargin2; // Set the income to the next lowest margin to prevent logic errors
+                    if (bracketRate == unsetBracket) // Set the bracket rate ONLY if it hasn't already been set
                         bracketRate = TIER3_RATE;
                 }
                 if (reportedIncome > declaredMargin1)
                 {
                     incomeTaxOwed += (reportedIncome - declaredMargin1) * TIER2_RATE;
-                    reportedIncome = declaredMargin1;
-                    if (bracketRate == 0)
+                    reportedIncome = declaredMargin1; // Set the income to the next lowest margin to prevent logic errors
+                    if (bracketRate == unsetBracket) // Set the bracket rate ONLY if it hasn't already been set
                         bracketRate = TIER2_RATE;
                 }
                 if (reportedIncome <= declaredMargin1)
                 {
                     incomeTaxOwed += reportedIncome * TIER1_RATE;
 
-                    if (bracketRate == 0)
+                    if (bracketRate == unsetBracket) // Set the bracket rate ONLY if it hasn't already been set
                         bracketRate = TIER1_RATE;
                 }
 
